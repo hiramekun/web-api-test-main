@@ -8,4 +8,8 @@ class UserService(private val userRepository: UserRepository) {
     fun getByOrNull(id: Long): User? {
         return transaction { userRepository.getByOrNull(id) }
     }
+
+    fun createUser(user: User): User {
+        return transaction { userRepository.insert(user) }
+    }
 }
