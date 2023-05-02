@@ -71,6 +71,7 @@ dependencies {
     testImplementation("io.insert-koin:koin-test-junit5:$koinVersion")
     testImplementation("io.ktor:ktor-server-test-host:$ktorVersion")
     testImplementation("io.ktor:ktor-server-test-host-jvm:2.2.4")
+    testImplementation("io.mockk:mockk:1.13.5")
 }
 
 tasks.withType<KotlinCompile> {

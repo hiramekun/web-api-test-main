@@ -5,7 +5,7 @@ import org.jetbrains.exposed.dao.LongEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 
 object UserTable : LongIdTableBase("users") {
-    val organizationId = long("organization")
+    val organizationId = long("organization_id")
     val name = varchar("name", 255)
     val email = varchar("email", 255)
     val password = varchar("password", 255)

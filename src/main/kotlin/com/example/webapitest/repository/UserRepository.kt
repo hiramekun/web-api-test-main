@@ -3,10 +3,8 @@ package com.example.webapitest.repository
 import com.example.webapitest.model.User
 import com.example.webapitest.repository.db.UserEntity
 import com.example.webapitest.repository.db.toUser
-import org.springframework.stereotype.Repository
 
-@Repository
-class UserRepository {
+object UserRepository {
 
     fun getByOrNull(id: Long): User? {
         return UserEntity.findById(id)?.toUser()
