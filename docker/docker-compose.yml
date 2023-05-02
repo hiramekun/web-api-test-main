@@ -1,0 +1,22 @@
+version: '3'
+services:
+  shiharaidb:
+    container_name: webapi-test-db
+    image: mysql
+    platform: linux/x86_64
+    build:
+      # setting parent directory as context to read files in other directory
+      context: ../
+      dockerfile: docker/webapi-test-db/Dockerfile
+    ports:
+      - "3316:3316"
+    environment:
+      MYSQL_DATABASE: shiharai
+      MYSQL_USER: testuser
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: upsidr
+      MYSQL_TCP_PORT: 3316
+    # comment in bellow to change user group and avoid error in windows docker-tools
+    # command: bash -c 'usermod -o -u 1000 mysql; groupmod -o -g 500 mysql; chown -R mysql:root /var/run/mysqld/; /entrypoint.sh mysqld --user=mysql --console'
+    volumes:
+      - ./webapi-test-db/db:/var/lib/mysql
