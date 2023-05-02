@@ -1,8 +1,10 @@
 package com.example.webapitest
 
+import com.example.webapitest.model.User
 import com.example.webapitest.service.UserService
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.application.*
+import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
@@ -17,6 +19,10 @@ fun Route.userRoutes(userService: UserService) {
                         "Unable to locate a user with the specified ID. Please ensure the provided ID is accurate and the user exists in the system."
                     )
             } ?: call.respond(HttpStatusCode.BadRequest, "Invalid user ID")
+        }
+        post {
+            val newUser = call.receive<User>()
+            call.respond(HttpStatusCode.Created, userService.createUser(newUser))
         }
     }
 }

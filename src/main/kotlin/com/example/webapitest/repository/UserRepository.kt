@@ -22,7 +22,7 @@ object UserRepository {
             password = user.password
             verified = user.verified
         }
-        // FIXME: insert した User（not null であること）をデータベースから取得して返却すること
+
         return entity.toUser()
     }
 }
