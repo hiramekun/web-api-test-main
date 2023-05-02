@@ -1,16 +1,32 @@
 package com.example.webapitest
 
+import com.example.webapitest.repository.UserRepository
+import com.example.webapitest.service.UserService
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import io.ktor.server.application.Application
+import io.ktor.serialization.jackson.*
+import io.ktor.server.application.*
+import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.server.routing.*
 import org.jetbrains.exposed.sql.Database
 
 fun main(args: Array<String>) {
     io.ktor.server.netty.EngineMain.main(args)
 }
 
+@Suppress("unused")
 fun Application.module() {
+    install(ContentNegotiation) {
+        jackson()
+    }
+
     connectDB()
+
+    val userService = UserService(UserRepository)
+
+    routing {
+        userRoutes(userService)
+    }
 }
 
 private fun connectDB() {

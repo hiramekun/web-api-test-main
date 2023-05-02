@@ -1,8 +1,11 @@
 package com.example.webapitest.service
 
-import org.springframework.stereotype.Service
+import com.example.webapitest.model.User
+import com.example.webapitest.repository.UserRepository
+import org.jetbrains.exposed.sql.transactions.transaction
 
-@Service
-class UserService {
-
+class UserService(private val userRepository: UserRepository) {
+    fun getByOrNull(id: Long): User? {
+        return transaction { userRepository.getByOrNull(id) }
+    }
 }
